@@ -12,7 +12,7 @@ IPackage
 import { ENDPOINTS } from "@/core/enums/api";
 
 class PackagesService {
-  static fetchAllNpmPackages = async (body?: IGetPackagesBody) => 
+  static fetchPackages = async (body?: IGetPackagesBody) => 
     errorHandledTryCatch<IPackage[]>(() => API.get(
       ENDPOINTS.ALL_PACKAGES,
       {

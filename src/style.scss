@@ -17,6 +17,12 @@ a {
   text-decoration: none;
 }
 
+ul,
+ol {
+  list-style-type: none;
+  padding: 0px;
+}
+
 input,
 button {
   outline: none;

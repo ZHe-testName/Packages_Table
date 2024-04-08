@@ -3,4 +3,10 @@
     font-size: 36px;
     color: $violet;
   }
+
+  &>ul {
+    display: flex;
+    flex-direction: column;
+    gap: $unit3;
+  }
 }
