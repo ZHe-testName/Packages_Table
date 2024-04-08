@@ -1,0 +1,30 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": [
+    "./env.d.ts",
+    "./src/**/*.ts",
+    "./src/**/*.vue",
+    "./typed-router.d.ts",
+    "./auto-imports.d.ts"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "noEmit": false,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "vueCompilerOptions": {
+    "plugins": [
+      "../volar"
+    ]
+  },
+  "references": [
+    {
+      "path": "./tsconfig.config.json"
+    }
+  ],
+  "files": [],
+}

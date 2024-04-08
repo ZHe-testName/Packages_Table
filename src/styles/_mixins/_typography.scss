@@ -1,0 +1,20 @@
+@mixin regular400($fontSize: 14px, $color: #181E36) {
+  font-weight: 400;
+  font-size: $fontSize;
+  color: $color;
+  line-height: $fontSize + 4;
+}
+
+@mixin regular600($fontSize: 18px, $color: #181E36) {
+  font-weight: 600;
+  font-size: $fontSize;
+  color: $color;
+  line-height: $fontSize + 6;
+}
+
+@mixin regular800($fontSize: 24px, $color: #181E36) {
+  font-weight: 800;
+  font-size: $fontSize;
+  color: $color;
+  line-height: $fontSize + 8;
+}

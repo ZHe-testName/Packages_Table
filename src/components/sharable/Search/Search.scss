@@ -1,0 +1,20 @@
+.search {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid $darkBlueSecondary;
+  border-radius: $unit2;
+  overflow: hidden;
+  padding: $unit3 $unit3;
+
+  &>input {
+    @include regular400(20px);
+    width: 100%;
+  }
+
+  &>img {
+    width: calc($unit4 - 8px);
+    height: calc($unit4 - 8px);
+    margin-left: $unit2;
+  }
+}
