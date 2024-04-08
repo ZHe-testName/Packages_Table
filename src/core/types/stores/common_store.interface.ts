@@ -5,5 +5,9 @@ export interface IndexedGetters {
 };
 
 export interface IErrorResponse extends Partial<AxiosError> {
-  detail: string;
+  status: number;
+  message: string;
+  links?: {
+    documentation?: string;
+  }
 };

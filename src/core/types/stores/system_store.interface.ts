@@ -1,4 +1,4 @@
-import type { IndexedGetters } from './common.interface';
+import type { IndexedGetters } from './common_store.interface';
 
 export interface State {
   isLoading: boolean;
