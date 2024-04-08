@@ -1,3 +1,33 @@
 .app-footer {
+  @include regular400(16px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $unit4;
+  padding: $unit2 $unit3;
+  margin-top: $unit3;
 
+  &__git {
+    &>a {
+      display: flex;
+      align-items: center;
+      gap: $unit3;
+
+      &>img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+
+  &__rights {
+    &>h4 {
+      @include regular600(16px);
+      text-align: right;
+    }
+
+    &>p {
+      @include regular400(12px);
+    }
+  }
 }

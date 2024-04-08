@@ -12,6 +12,11 @@
   font-weight: normal;
 }
 
+a {
+  @include regular400(16px);
+  text-decoration: none;
+}
+
 input,
 button {
   outline: none;
