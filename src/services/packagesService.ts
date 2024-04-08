@@ -1,20 +1,24 @@
-// import { errorHandledTryCatch } from "@/helpers";
+
+import { errorHandledTryCatch } from "@/helpers";
 import { API } from "@/api/api";
-// import type {
+import type {
 //   IAllContainersBody,
 //   IContainerDataBody,
 //   IContainerDataResponse,
 //   IContainersListResponse,
-//   ISetContainerParamBody
-// } from "@/core/types/api/interfaces";
-// import { ENDPOINTS } from "@/core/types/api/enums";
+IGetPackagesBody,
+IPackage
+} from "@/core/types/api";
+import { ENDPOINTS } from "@/core/enums/api";
 
-class packagesService {
-  // static fetchAllContainers = async (body: IAllContainersBody) => 
-  //   errorHandledTryCatch<IContainersListResponse>(() => API.post(
-  //     ENDPOINTS.ALL_CONTAINERS_DATA, 
-  //     { req: JSON.stringify(body) }
-  //   ));
+class PackagesService {
+  static fetchAllNpmPackages = async (body?: IGetPackagesBody) => 
+    errorHandledTryCatch<IPackage[]>(() => API.get(
+      ENDPOINTS.ALL_PACKAGES,
+      {
+        params: body || {},
+      }
+    ));
 
   // static fetchContainerData = async (body: IContainerDataBody) => 
   //   errorHandledTryCatch<IContainerDataResponse>(() => API.post(
@@ -29,4 +33,4 @@ class packagesService {
   //   ));
 };
 
-export { packagesService };
+export { PackagesService };

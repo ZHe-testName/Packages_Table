@@ -7,7 +7,15 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
 
+import { usePackagesStore } from '@/stores/packagesStore';
+
+const { fetchPackages } = usePackagesStore();
+
+onMounted(() => {
+  fetchPackages();
+});
 </script>
 
 <style scoped lang="scss">
