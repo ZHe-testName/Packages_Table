@@ -9,7 +9,7 @@ const router = createRouter({
       name: ROUTER_NAMES.PACKAGE_TABLE,
       component: () => import('../view/MainTable/MainTable.vue'),
     },
-    {path: '/', redirect: ROUTER_URLS.PACKAGE_TABLE},
+    {path: '/', redirect: ROUTER_URLS.PACKAGE_TABLE.replace(':page', '1')},
   ],
 })
 

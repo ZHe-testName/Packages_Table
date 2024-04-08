@@ -1,0 +1,14 @@
+.package-item {
+  display: grid;
+  grid-template-columns: 60px 160px repeat(2, 1fr);
+  align-items: center;
+  gap: $unit3;
+  padding: $unit3 $unit2;
+  border-radius: $unit2;
+  border: 2px solid $darkBluePrimary;
+
+  &>img {
+    width: 46px;
+    height: 46px;
+  }
+}

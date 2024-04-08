@@ -9,6 +9,7 @@ export const usePackagesStore = defineStore<'packages', State, Getters, Actions>
     packages: [],
     currentPage: 1,
     packagesLimit: 10,
+    packageType: undefined,
   }),
   actions: {
     async fetchPackages(params) {
@@ -16,13 +17,17 @@ export const usePackagesStore = defineStore<'packages', State, Getters, Actions>
 
       setIsLoading(true);
 
-      this.packages = (await PackagesService.fetchAllNpmPackages({
+      this.packages = (await PackagesService.fetchPackages({
         ...params,
+        type: this.packageType,
         page: this.currentPage,
         limit: this.packagesLimit,
       }))?.data || [];
 
       setIsLoading(false);
+    },
+    setPageNumber(newVal) {
+      this.currentPage = newVal;
     },
   }
 });
