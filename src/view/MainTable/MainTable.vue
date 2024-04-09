@@ -2,8 +2,6 @@
   <div
     class="main-table"
   >
-    <h1>I'm main table</h1>
-
     <MainTableLayout>
       <ul>
         <li
