@@ -1,0 +1,10 @@
+.main-table {
+  &__filters {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $unit3;
+    padding: $unit2 $unit3;
+    margin-bottom: $unit3;
+  }
+};

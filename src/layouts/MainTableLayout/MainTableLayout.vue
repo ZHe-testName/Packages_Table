@@ -2,18 +2,34 @@
   <div
     class="main-table"
   >
+    <div class="main-table__filters">
+      <Checkbox 
+        title="NPM"
+        :checkbox-value="PACKAGE_TYPES.NPM"
+        @change="checkboxChangeHandler"
+      />
+
+      <Checkbox 
+        title="GitHub"
+        :checkbox-value="PACKAGE_TYPES.GH"
+        @change="checkboxChangeHandler"
+      />
+    </div>
     <slot />
 
     <Pagination
       @change-page="changePageHandler"
-      @next-page="() => nextPageHandler()"
-      @prev-page="() => prevPageHandler()"
+      @next-page="nextPageHandler"
+      @prev-page="prevPageHandler"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import Pagination from '@/components/sharable/Pagination/Pagination.vue';
+import Checkbox from '@/components/sharable/Checkbox/Checkbox.vue';
+
+import { PACKAGE_TYPES } from '@/core/enums/api';
 
 import { usePackagesStore } from '@/stores/packagesStore';
 import { storeToRefs } from 'pinia';
@@ -43,6 +59,10 @@ function prevPageHandler() {
 
   setPageNumber(currentPage.value - 1);
   fetchPackages();
+};
+
+function checkboxChangeHandler(val: string) {
+  console.log('dddd', val);
 };
 </script>
 
