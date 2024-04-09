@@ -1,0 +1,67 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $unit4;
+  margin: $unit5 auto $unit2;
+
+  &__arrow {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border: 1px solid $darkBlueGray;
+    border-radius: $unit2;
+    cursor: pointer;
+
+    &:hover {
+      transition: all;
+      transition-duration: 0.5s;
+      transform: rotateZ(360deg) scale(1.1);
+    }
+  }
+
+  &>.left,
+  &>.right {
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-top: 2px solid $darkBluePrimary;
+      border-left: 2px solid $darkBluePrimary;
+    }
+  }
+
+  &>.left {
+    &::after {
+      left: 12px;
+      top: 10px;
+      transform: rotateZ(315deg);
+    }
+  }
+
+  &>.right {
+    &::after {
+      left: 8px;
+      top: 10px;
+      transform: rotateZ(135deg);
+    }
+  }
+
+  &>.disabled {
+    cursor: default;
+    filter: blur(2px);
+
+    &:hover {
+      transform: rotateZ(0deg) scale(1);
+    }
+  }
+
+  &__items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $unit3;
+  }
+}
