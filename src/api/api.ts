@@ -1,4 +1,6 @@
 import { useSystemStore } from '@/stores/systemStore';
+import { usePackagesStore } from '@/stores/packagesStore';
+
 import axios, 
 { 
   type AxiosInstance, 
@@ -20,15 +22,12 @@ const instance: AxiosInstance = axios.create(axiosConfig);
 
 instance.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
-    const systemStore = useSystemStore();
-
-    systemStore.setIsLoading(true);
+    useSystemStore().setIsLoading(true);
 
     return config;
   },
   (error: AxiosError<any>) => {
-    const systemStore = useSystemStore();
-    systemStore.setIsLoading(false);
+    useSystemStore().setIsLoading(false);
 
     return Promise.reject(error);
   }
@@ -36,14 +35,13 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (res: AxiosResponse) => {
-    const systemStore = useSystemStore();
-    systemStore.setIsLoading(false);
+    useSystemStore().setIsLoading(false);
+    usePackagesStore().setTotalPages(+res.headers['x-total-pages']);
 
     return res;
   },
   (error: AxiosError<any>) => {
-    const systemStore = useSystemStore();
-    systemStore.setIsLoading(false);
+    useSystemStore().setIsLoading(false);
 
     return Promise.reject(error);
   }
