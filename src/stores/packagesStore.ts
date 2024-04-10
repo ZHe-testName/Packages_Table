@@ -10,6 +10,7 @@ export const usePackagesStore = defineStore<'packages', State, Getters, Actions>
     packagesLimit: 10,
     totalPages: 0,
     packageType: [],
+    singlePackage: null,
   }),
   actions: {
     async fetchPackages(params) {
@@ -19,6 +20,9 @@ export const usePackagesStore = defineStore<'packages', State, Getters, Actions>
         page: this.currentPage,
         limit: this.packagesLimit,
       }))?.data || [];
+    },
+    async fetchSinglePackage(packageName, type) {
+        
     },
     setPageNumber(newVal) {
       this.currentPage = newVal;
