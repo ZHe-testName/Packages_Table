@@ -59,14 +59,14 @@ const paginationItems: ComputedRef<IPaginationItemProps[]> = computed(() => {
     return items.map((i, _, arr) => {
       if (i < 3) {
         const number = i + 1;
-        return createItem(number, number === currentPage.value );
+        return createItem(number, number === currentPage.value);
       };
 
       if (i === 3) return createItem(0, false);
 
       const number = totalPages.value - (arr.length - ++i);
 
-      return createItem(number, number === currentPage.value );
+      return createItem(number, number === currentPage.value);
     });
   };
   
@@ -74,9 +74,9 @@ const paginationItems: ComputedRef<IPaginationItemProps[]> = computed(() => {
     if (i === 0 || i === 6) return createItem(i === 0 ? 1 : totalPages.value , false);
     if (i === 1 || i === 5) return createItem(0, false);
 
-    const number = currentPage.value  + (i - 3);
+    const number = currentPage.value + (i - 3);
 
-    return createItem(number, number === currentPage.value );
+    return createItem(number, number === currentPage.value);
   });
 });
 

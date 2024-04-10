@@ -1,8 +1,10 @@
+import type { PACKAGE_TYPES } from "@/core/enums/api";
+
 export interface ICheckboxProps {
   title: string;
-  checkboxValue: string;
+  checkboxValue: PACKAGE_TYPES;
 };
 
 export interface ICheckboxEmits {
-  (e: 'change', payload: string): void;
+  (e: 'change', payload: PACKAGE_TYPES, isChecked: boolean): void;
 };

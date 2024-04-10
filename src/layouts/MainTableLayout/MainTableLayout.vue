@@ -34,14 +34,22 @@ import { PACKAGE_TYPES } from '@/core/enums/api';
 import { usePackagesStore } from '@/stores/packagesStore';
 import { storeToRefs } from 'pinia';
 
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
 const { 
     fetchPackages,
-    setPageNumber
+    setPageNumber,
+    setPackageType
 } = usePackagesStore();
+
 const { currentPage, totalPages } = storeToRefs(usePackagesStore());
 
 function changePageHandler(num: number) {
   if (currentPage.value === num) return;
+
+  router.push({ params: { page: num } });
 
   setPageNumber(num);
   fetchPackages();
@@ -50,6 +58,8 @@ function changePageHandler(num: number) {
 function nextPageHandler() {
   if (currentPage.value === totalPages.value) return;
 
+  router.push({ params: { page: currentPage.value + 1 } });
+
   setPageNumber(currentPage.value + 1);
   fetchPackages();
 };
@@ -57,12 +67,19 @@ function nextPageHandler() {
 function prevPageHandler() {
   if (currentPage.value === 1) return;
 
+  router.push({ params: { page: currentPage.value - 1 } });
+
   setPageNumber(currentPage.value - 1);
   fetchPackages();
 };
 
-function checkboxChangeHandler(val: string) {
-  console.log('dddd', val);
+function checkboxChangeHandler(val: PACKAGE_TYPES, isChecked: boolean) {
+  setPackageType(val, isChecked);
+
+  router.push({ params: { page: 1 } });
+  
+  setPageNumber(1);
+  fetchPackages();
 };
 </script>
 

@@ -1,6 +1,5 @@
 export enum ENDPOINTS {
-  LOGIN = 'login',
+  NPM_HUB_PACKAGES = 'packages/npm/',
   ALL_PACKAGES = 'stats/packages',
-  CONTAINER_DATA = 'data',
-  SET_CONTAINER_PARAMS = 'data',
+  GIT_HUB_PACKAGES = 'packages/gh/',
 };

@@ -9,13 +9,13 @@ export const usePackagesStore = defineStore<'packages', State, Getters, Actions>
     currentPage: 1,
     packagesLimit: 10,
     totalPages: 0,
-    packageType: undefined,
+    packageType: [],
   }),
   actions: {
     async fetchPackages(params) {
       this.packages = (await PackagesService.fetchPackages({
         ...params,
-        type: this.packageType,
+        type: this.packageType.length === 1 ? this.packageType[0] : undefined,
         page: this.currentPage,
         limit: this.packagesLimit,
       }))?.data || [];
@@ -25,6 +25,19 @@ export const usePackagesStore = defineStore<'packages', State, Getters, Actions>
     },
     setTotalPages(num) {
       this.totalPages = num;
+    },
+    setPackageType(type, isChecked) {
+      if (isChecked) {
+        this.packageType.push(type);
+
+        return;
+      };
+
+      const idx = this.packageType.findIndex(t => t === type);
+
+      if (idx < 0) return;
+
+      this.packageType.splice(idx, 1);
     },
   }
 });

@@ -2,35 +2,30 @@
 import { errorHandledTryCatch } from "@/helpers";
 import { API } from "@/api/api";
 import type {
-//   IAllContainersBody,
-//   IContainerDataBody,
-//   IContainerDataResponse,
-//   IContainersListResponse,
-IGetPackagesBody,
-IPackage
+  IGetPackagesParams,
+  IPackage,
+  ISingleExpandPackage
 } from "@/core/types/api";
 import { ENDPOINTS } from "@/core/enums/api";
 
 class PackagesService {
-  static fetchPackages = async (body?: IGetPackagesBody) => 
+  static fetchPackages = async (params?: IGetPackagesParams) => 
     errorHandledTryCatch<IPackage[]>(() => API.get(
       ENDPOINTS.ALL_PACKAGES,
       {
-        params: body || {},
+        params: params || {},
       }
     ));
 
-  // static fetchContainerData = async (body: IContainerDataBody) => 
-  //   errorHandledTryCatch<IContainerDataResponse>(() => API.post(
-  //     ENDPOINTS.CONTAINER_DATA,
-  //     { req: JSON.stringify(body) }
-  //   ));
+  static fetchGitHubPackage = async (packageName: string) => 
+    errorHandledTryCatch<ISingleExpandPackage>(() => API.get(
+      ENDPOINTS.GIT_HUB_PACKAGES + packageName
+    ));
 
-  // static sendContainerParams = async (body: ISetContainerParamBody) => 
-  //   errorHandledTryCatch<IContainerDataResponse>(() => API.post(
-  //     ENDPOINTS.SET_CONTAINER_PARAMS,
-  //     { req: JSON.stringify(body) }
-  //   ));
+  static fetchNpmPackage = async (packageName: string) => 
+    errorHandledTryCatch<ISingleExpandPackage>(() => API.get(
+      ENDPOINTS.NPM_HUB_PACKAGES + packageName
+    ));
 };
 
 export { PackagesService };
