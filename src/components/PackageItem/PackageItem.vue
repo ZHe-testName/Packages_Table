@@ -37,9 +37,7 @@ const { bandwidth, type } = defineProps<IPackagesItemProps>();
 
 const packageWeight = computed<string>(() => `${Math.floor(bandwidth / 1000000)} Mb`);
 const packageImg = computed<IImages>(() => {
-  if (type === PACKAGE_TYPES.NPM) return IMGS.npm_logo;
-
-  return IMGS.github_logo
+  return (type === PACKAGE_TYPES.NPM) ? IMGS.npm_logo : IMGS.github_logo;
 });
 </script>
 

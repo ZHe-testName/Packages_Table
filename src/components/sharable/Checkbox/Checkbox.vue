@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import type { PACKAGE_TYPES } from '@/core/enums/api';
 import type { ICheckboxEmits, ICheckboxProps } from '@/core/types/components/interfaces';
 
 const { checkboxValue } = defineProps<ICheckboxProps>();
@@ -25,13 +26,7 @@ function changeHandler(e: Event) {
 
   if (!target) return;
 
-  if (!target.checked) {
-    emit('change', '');
-
-    return;
-  };
-
-  emit('change', target.value || '');
+  emit('change', target.value as PACKAGE_TYPES, target.checked);
 };
 </script>
 

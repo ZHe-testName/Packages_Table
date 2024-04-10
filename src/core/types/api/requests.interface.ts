@@ -1,6 +1,6 @@
 import type { PACKAGE_TYPES, PERIOD_TYPES, SORT_BY } from "@/core/enums/api";
 
-export interface IGetPackagesBody {
+export interface IGetPackagesParams {
   by?: SORT_BY;
   type?: PACKAGE_TYPES;
   period?: PERIOD_TYPES;

@@ -18,6 +18,7 @@
     transition: all;
     transition-duration: 0.4s;
     transform: scale(1.08);
+    box-shadow: 0px 0px 7px 1px $lightBlue;
   }
 }
 
@@ -26,6 +27,13 @@
   box-shadow: 0px 0px 16px -2px $darkBlueBG;
   border: 1px solid $mainWhite;
   transform: scale(1.08);
+
+  &:hover {
+    transition: all;
+    transition-duration: 0s;
+    box-shadow: 0px 0px 16px -2px $darkBlueBG;
+    cursor: default;
+  }
   
   &>span {
     @include regular400(16px, $mainWhite);
