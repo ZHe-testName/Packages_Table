@@ -3,3 +3,4 @@ export * from './span_with_input.interface';
 export * from './pagination.interface';
 export * from './checkbox.interface';
 export * from './modal.interface';
+export * from './text_pill.interface';

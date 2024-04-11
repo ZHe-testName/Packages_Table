@@ -1,6 +1,109 @@
 .single-package {
   width: 50vw;
+  max-width: 632px;
   background-color: $mainWhite;
   border-radius: $unit2;
   border: 2px solid $lightBlue;
+  cursor: default;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $unit3;
+    border-bottom: 1px solid $darkBluePrimary;
+
+    &>img {
+      width: 62px;
+    }
+
+    &>h3 {
+      @include regular600(24px);
+    }
+
+    &>button {
+      position: relative;
+      width: $unit4;
+      height: $unit4;
+      border-radius: 50%;
+      background-color: $blueSecondary;
+      cursor: pointer;
+      transition: all;
+      transition-duration: 0.3s;
+
+      &::after,
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 15px;
+        width: 20px;
+        height: 2px;
+        background-color: $darkBluePrimary;
+      }
+
+      &::after {
+        transform: rotateZ(45deg);
+      }
+
+      &::before {
+        transform: rotateZ(-45deg);
+      }
+
+      &:hover {
+        transition: all;
+        transition-duration: 0.3s;
+        transform: scale(1.1);
+        box-shadow: 0px 0px 6px 0px $blueSecondary;
+      }
+    }
+  }
+
+  &__body {
+    padding: $unit3;
+
+    &--type {
+      @include regular400(20px);
+      text-decoration: underline;
+    }
+
+    &--tags,
+    &--versions {
+      margin-top: $unit3;
+      padding-bottom: $unit3;
+
+      &>h5 {
+        @include regular600(18px);
+      }
+    }
+
+    &--tags {
+      &>ul {
+        padding-left: $unit2;
+        margin-top: $unit2;
+
+        &>li {
+          &>span:last-of-type {
+            @include regular600(16px);
+            margin-left: $unit2;
+          }
+        }
+      }
+    }
+
+    &--versions {
+      &>ul {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: $unit2;
+        margin-top: $unit2;
+        max-height: 240px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: $unit3;
+      }
+    }
+  }
 }
