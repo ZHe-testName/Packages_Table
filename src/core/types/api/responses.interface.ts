@@ -1,3 +1,5 @@
+import type { PACKAGE_TYPES } from "@/core/enums/api";
+
 export interface IPackageVersion {
   version: string;
   links: {
@@ -8,7 +10,7 @@ export interface IPackageVersion {
 };
 
 export interface IPackage {
-  type: string;
+  type: PACKAGE_TYPES;
   name: string;
   hits: number;
   bandwidth: number;
@@ -23,7 +25,7 @@ export interface IPackage {
 };
 
 export interface ISingleExpandPackage {
-  type: string;
+  type: PACKAGE_TYPES;
   name: string;
   tags: Object;
   versions: IPackageVersion[];

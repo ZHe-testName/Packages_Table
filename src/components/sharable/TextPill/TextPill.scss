@@ -1,0 +1,9 @@
+.text-pill {
+  padding: $unit1 $unit2;
+  border: 1px solid $darkBlueSecondary;
+  border-radius: $unit3;
+
+  &>span {
+    @include regular400(16px);
+  }
+}

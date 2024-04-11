@@ -11,7 +11,7 @@ export interface ISinglePackageContext {
   type: PACKAGE_TYPES;
   name: string;
   tags?: Object;
-  versions: string[]; 
+  versions?: string[]; 
 };
 
-export interface IModalContext extends Record<MODAL_NAMES, ISinglePackageContext> {};
+export interface IModalContext extends Record<MODAL_NAMES, ISinglePackageContext | undefined> {};
