@@ -87,7 +87,7 @@
           <li
             v-if="data?.repository?.url"
           >
-          <a :href="data?.repository.url" target="_blank">Repository</a>
+            <a :href="repositoryUrl" target="_blank">Repository</a>
           </li>
         </ul>
       </div>
@@ -109,6 +109,11 @@ import { computed } from 'vue';
 const { getContext: data } = storeToRefs(useModalStore());
 
 const weightInMb = computed<string>(() => ((data.value?.dist.unpackedSize || 0) / 1024 / 1000).toFixed(2) + 'Mb');
+const repositoryUrl = computed<string>(() => {
+  if (!data.value?.repository.url) return '';
+
+  return data.value.repository.url.replace('git+', '');
+});
 
 </script>
 

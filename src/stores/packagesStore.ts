@@ -2,23 +2,17 @@ import { defineStore } from "pinia";
 import type { State, Getters, Actions } from "@/core/types/stores/packages_store.interface";
 
 import { PackagesService } from "@/services";
-import { useRoute } from "vue-router";
 
 export const usePackagesStore = defineStore<'packages', State, Getters, Actions>('packages', {
-  state: () => {
-    const route = useRoute();
-
-    console.log('RRRR', route);
-    return {
-      packages: [],
-      currentPage: 1,
-      packagesLimit: 10,
-      totalPages: 0,
-      packageType: [],
-      singlePackage: null,
-      searchValue: '',
-    }
-  },
+  state: () => ({
+    packages: [],
+    currentPage: 1,
+    packagesLimit: 10,
+    totalPages: 0,
+    packageType: [],
+    singlePackage: null,
+    searchValue: '',
+  }),
   actions: {
     async searchPackages() {
       const data = (await PackagesService.searchNpmPackage({

@@ -2,19 +2,6 @@
   <div
     class="main-table"
   >
-    <!-- <div class="main-table__filters">
-      <Checkbox 
-        title="NPM"
-        :checkbox-value="PACKAGE_TYPES.NPM"
-        @change="checkboxChangeHandler"
-      />
-
-      <Checkbox 
-        title="GitHub"
-        :checkbox-value="PACKAGE_TYPES.GH"
-        @change="checkboxChangeHandler"
-      />
-    </div> -->
     <slot />
 
     <Pagination
@@ -28,7 +15,6 @@
 
 <script setup lang="ts">
 import Pagination from '@/components/sharable/Pagination/Pagination.vue';
-// import Checkbox from '@/components/sharable/Checkbox/Checkbox.vue';
 
 import { usePackagesStore } from '@/stores/packagesStore';
 import { storeToRefs } from 'pinia';

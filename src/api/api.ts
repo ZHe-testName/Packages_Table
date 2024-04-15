@@ -1,5 +1,4 @@
 import { useSystemStore } from '@/stores/systemStore';
-import { usePackagesStore } from '@/stores/packagesStore';
 
 import axios, 
 { 
@@ -36,7 +35,6 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (res: AxiosResponse) => {
     useSystemStore().setIsLoading(false);
-    // usePackagesStore().setTotalPages(+res.headers['x-total-pages']);
 
     return res;
   },

@@ -45,6 +45,7 @@ const {
     setPageNumber,
     setSearchString
 } = usePackagesStore();
+
 const { packages } = storeToRefs(usePackagesStore());
 
 onMounted(() => {
@@ -52,7 +53,6 @@ onMounted(() => {
   setSearchString(route.query?.search as string || '')
   
   searchPackages();
-  console.log('MMMM', route.query?.search);
 });
 </script>
 

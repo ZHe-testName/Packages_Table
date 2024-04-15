@@ -14,6 +14,7 @@
 
 <script setup lang="ts">
 import type { ISpanWithTitleProps } from '@/core/types/components/interfaces';
+
 defineProps<ISpanWithTitleProps>();
 </script>
 
