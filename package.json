@@ -11,6 +11,7 @@
     "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
+    "algoliasearch": "^4.23.3",
     "axios": "^1.6.8",
     "pinia": "^2.1.7",
     "unplugin-vue-components": "^0.26.0",

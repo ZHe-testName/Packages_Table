@@ -8,7 +8,8 @@ export const errorHandledTryCatch = async <T>(f: () => Promise<AxiosResponse<T> 
   try {
     return await f();
   } catch (error) {
-    const msg  = (error as AxiosError<IErrorResponse>).message 
+    const msg  = (error as AxiosError<IErrorResponse>).response?.data.message
+      || (error as AxiosError<IErrorResponse>).message 
       || 'Something went wrong';
 
     systemStore.setErrorMessages(msg);

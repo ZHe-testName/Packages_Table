@@ -2,69 +2,51 @@ import { defineStore } from "pinia";
 import type { State, Getters, Actions } from "@/core/types/stores/packages_store.interface";
 
 import { PackagesService } from "@/services";
-import { PACKAGE_TYPES } from "@/core/enums/api";
+import { useRoute } from "vue-router";
 
 export const usePackagesStore = defineStore<'packages', State, Getters, Actions>('packages', {
-  state: () => ({
-    packages: [],
-    currentPage: 1,
-    packagesLimit: 10,
-    totalPages: 0,
-    packageType: [],
-    singlePackage: null,
-  }),
-  getters: {
-    getSinglePackageData(state) {
-      if (!state.singlePackage) return;
+  state: () => {
+    const route = useRoute();
 
-      const { name, type, tags, versions } = state.singlePackage;
-
-      return {
-        name,
-        type,
-        tags: Object.keys(tags).length ? tags : undefined,
-        versions: versions.map(v => v.version),
-      };
-    },
+    console.log('RRRR', route);
+    return {
+      packages: [],
+      currentPage: 1,
+      packagesLimit: 10,
+      totalPages: 0,
+      packageType: [],
+      singlePackage: null,
+      searchValue: '',
+    }
   },
   actions: {
-    async fetchPackages(params) {
-      this.packages = (await PackagesService.fetchPackages({
-        ...params,
-        type: this.packageType.length === 1 ? this.packageType[0] : undefined,
-        page: this.currentPage,
-        limit: this.packagesLimit,
-      }))?.data || [];
+    async searchPackages() {
+      const data = (await PackagesService.searchNpmPackage({
+        text: this.searchValue,
+        size: this.packagesLimit,
+        from: this.currentPage === 1 ? 0 : 10 * (this.currentPage - 1),
+      }))?.data || null;
+
+      if (!data) return;
+
+      const { objects, total } = data;
+
+      this.packages = objects;
+      this.totalPages = Math.ceil(total / this.packagesLimit);
     },
-    async fetchSinglePackage(packageName, type) {
-      if (type === PACKAGE_TYPES.NPM) {
-        this.singlePackage = (await PackagesService.fetchNpmPackage(packageName))?.data || null;
+    async fetchSinglePackage(packageName, version) {
+      this.singlePackage = (await PackagesService.fetchSinglePackage(packageName, version))?.data || null;
 
-        return true;
-      };
-
-      this.singlePackage = (await PackagesService.fetchGitHubPackage(packageName))?.data || null;
-
-      return true;
+      return !!this.singlePackage;
+    },
+    setSearchString(searchVal) {
+      this.searchValue = searchVal;
     },
     setPageNumber(newVal) {
       this.currentPage = newVal;
     },
     setTotalPages(num) {
       this.totalPages = num;
-    },
-    setPackageType(type, isChecked) {
-      if (isChecked) {
-        this.packageType.push(type);
-
-        return;
-      };
-
-      const idx = this.packageType.findIndex(t => t === type);
-
-      if (idx < 0) return;
-
-      this.packageType.splice(idx, 1);
     },
   }
 });

@@ -5,7 +5,10 @@
   justify-content: space-between;
   gap: $unit4;
   padding: $unit2 $unit3;
+  margin: $unit2;
   margin-top: $unit3;
+  border: 1px solid $darkBlueBG;
+  border-radius: $unit2;
 
   &__git {
     &>a {
@@ -31,3 +34,10 @@
     }
   }
 }
+
+@media (max-width: $tablet) {
+  .app-footer {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+};

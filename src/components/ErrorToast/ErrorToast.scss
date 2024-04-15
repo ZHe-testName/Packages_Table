@@ -1,0 +1,22 @@
+.error-toast {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  top: 60px;
+  right: 40px;
+  border: 2px solid $mainRed;
+  padding: $unit3;
+  background-color: $mainWhite;
+  border-radius: $unit3;
+  margin-left: 40px;
+  z-index: 4;
+
+  &>h6 {
+    @include regular600(18px, $mainRed);
+  }
+
+  &>p {
+    @include regular400(16px);
+  }
+}

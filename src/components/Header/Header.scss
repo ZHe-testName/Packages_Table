@@ -4,7 +4,9 @@
   justify-content: space-between;
   gap: $unit4;
   padding: $unit2 $unit3;
-  margin-bottom: $unit3;
+  margin: $unit2;
+  border: 1px solid $darkBlueBG;
+  border-radius: $unit2;
 
   &__logo {
     display: flex;
@@ -26,3 +28,14 @@
     flex-basis: 60%;
   }
 }
+
+@media (max-width: $tablet) {
+  .app-header {
+    flex-direction: column;
+
+    &__search {
+      flex-basis: unset;
+      width: 100%;
+    }
+  }
+};
