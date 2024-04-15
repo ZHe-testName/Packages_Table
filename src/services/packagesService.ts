@@ -3,29 +3,17 @@ import { errorHandledTryCatch } from "@/helpers";
 import { API } from "@/api/api";
 import type {
   IGetPackagesParams,
-  IPackage,
-  ISingleExpandPackage
+  ISearchResponse,
+  ISinglePackageResponse
 } from "@/core/types/api";
 import { ENDPOINTS } from "@/core/enums/api";
 
 class PackagesService {
-  static fetchPackages = async (params?: IGetPackagesParams) => 
-    errorHandledTryCatch<IPackage[]>(() => API.get(
-      ENDPOINTS.ALL_PACKAGES,
-      {
-        params: params || {},
-      }
-    ));
+  static fetchSinglePackage = async (packageName: string, version: string) => 
+    errorHandledTryCatch<ISinglePackageResponse>(() => API.get(`${ENDPOINTS.SINGLE_PACKAGE}${packageName}/${version}`));
 
-  static fetchGitHubPackage = async (packageName: string) => 
-    errorHandledTryCatch<ISingleExpandPackage>(() => API.get(
-      ENDPOINTS.GIT_HUB_PACKAGES + packageName
-    ));
-
-  static fetchNpmPackage = async (packageName: string) => 
-    errorHandledTryCatch<ISingleExpandPackage>(() => API.get(
-      ENDPOINTS.NPM_HUB_PACKAGES + packageName
-    ));
+  static searchNpmPackage = async (params: IGetPackagesParams) => 
+    errorHandledTryCatch<ISearchResponse>(() => API.get(ENDPOINTS.SEARCH_PACKAGES, {params}));
 };
 
 export { PackagesService };

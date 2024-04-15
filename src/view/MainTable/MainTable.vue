@@ -3,18 +3,27 @@
     class="main-table"
   >
     <MainTableLayout>
-      <ul>
+      <ul
+        v-if="packages?.length"
+      >
         <li
           v-for="item in packages"
-          :key="item.bandwidth"
+          :key="item.package.name"
         >
           <PackageItem
-            :bandwidth="item.bandwidth"
-            :type="item.type"
-            :name="item.name"
+            :name="item.package.name"
+            :version="item.package.version"
+            :description="item.package.description"
           />
         </li>
       </ul>
+
+      <div 
+        v-else
+        class="main-table__empty"
+      >
+        <h2>There are no results :(</h2>
+      </div>
     </MainTableLayout>
   </div>
 </template>
@@ -32,15 +41,18 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 
 const { 
-    fetchPackages,
-    setPageNumber
+    searchPackages,
+    setPageNumber,
+    setSearchString
 } = usePackagesStore();
 const { packages } = storeToRefs(usePackagesStore());
 
 onMounted(() => {
   setPageNumber(+route.params?.page || 1);
+  setSearchString(route.query?.search as string || '')
   
-  fetchPackages();
+  searchPackages();
+  console.log('MMMM', route.query?.search);
 });
 </script>
 

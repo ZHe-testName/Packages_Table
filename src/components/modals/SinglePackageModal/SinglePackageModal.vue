@@ -4,11 +4,11 @@
   >
     <div class="single-package__header">
       <img 
-        :src="packageImg.src" 
-        :alt="packageImg.alt"
+        :alt="IMGS.npm_logo.alt"
+        :src="IMGS.npm_logo.src" 
       >
 
-      <h3>{{ data?.single_package?.name }}</h3>
+      <h3>{{ data?.name }}</h3>
 
       <button
         @click="() => useModalStore().removeModal()"
@@ -16,38 +16,78 @@
     </div>
 
     <div class="single-package__body">
-      <span class="single-package__body--type">{{ data?.single_package?.type }}</span>
+      <div class="single-package__body--author">
+        <SpanWithTitle 
+          title="Author"
+          :text="data?.author?.name || ''"
+        />
+
+        <SpanWithTitle 
+          title="Files"
+          :text="`${data?.dist?.fileCount}`"
+        />
+
+        <SpanWithTitle 
+          title="Unpacked size"
+          :text="weightInMb"
+        />
+      </div>
+
+      <p>
+        {{ data?.description }}
+      </p>
 
       <div 
-        v-if="data?.single_package?.tags"
-        class="single-package__body--tags"
+        v-if="data?.buildOptions?.formats.length"
+        class="single-package__body--formats"
       >
-        <h5>Tags:</h5>
+        <h5>Formats:</h5>
 
         <ul>
           <li
-            v-for="tag in Object.entries(data?.single_package?.tags)"
+            v-for="format in data?.buildOptions.formats"
           >
-            <span>{{ tag[0] }}:</span>
-            
-            <span>{{ tag[1] }}</span>
+            <TextPill 
+              :text="format"
+            />
           </li>
         </ul>
       </div>
       
       <div 
-        v-if="data?.single_package?.versions?.length"
-        class="single-package__body--versions"
+        v-if="data?.maintainers.length"
+        class="single-package__body--maintainers"
       >
-        <h5>Versions:</h5>
+        <h5>Maintainers:</h5>
 
         <ul>
           <li
-            v-for="version in data.single_package.versions"
+            v-for="maintainer in data.maintainers"
           >
-            <TextPill 
-              :text="version"
+            <SpanWithTitle 
+              :title="maintainer.name"
+              :text="maintainer.email"
             />
+          </li>
+        </ul>
+      </div>
+
+      <div 
+        class="single-package__body--links"
+      >
+        <h5>Links:</h5>
+
+        <ul>
+          <li
+            v-if="data?.homepage"
+          >
+            <a :href="data.homepage" target="_blank">Homepage</a>
+          </li>
+
+          <li
+            v-if="data?.repository?.url"
+          >
+          <a :href="data?.repository.url" target="_blank">Repository</a>
           </li>
         </ul>
       </div>
@@ -57,21 +97,19 @@
 
 <script setup lang="ts">
 import TextPill from '@/components/sharable/TextPill/TextPill.vue';
+import SpanWithTitle from '@/components/sharable/SpanWithTitle/SpanWithTitle.vue';
 
 import { IMGS } from '@/core/constants';
-import { PACKAGE_TYPES } from '@/core/enums/api';
-import type { IImages } from '@/core/types/general';
-import { useModalStore } from '@/stores/modalStore';
 
+import { useModalStore } from '@/stores/modalStore';
 import { storeToRefs } from 'pinia';
 
 import { computed } from 'vue';
 
-const { activeModalContext: data } = storeToRefs(useModalStore());
+const { getContext: data } = storeToRefs(useModalStore());
 
-const packageImg = computed<IImages>(() => {
-  return (data.value?.single_package?.type === PACKAGE_TYPES.NPM) ? IMGS.npm_logo : IMGS.github_logo;
-});
+const weightInMb = computed<string>(() => ((data.value?.dist.unpackedSize || 0) / 1024 / 1000).toFixed(2) + 'Mb');
+
 </script>
 
 <style scoped lang="scss">

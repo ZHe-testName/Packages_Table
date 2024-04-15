@@ -53,6 +53,12 @@ const emit = defineEmits<IPaginationEmits>();
 // calculation need's to compute pagination items array 
 // for correct pagination appearance according to current page number
 const paginationItems: ComputedRef<IPaginationItemProps[]> = computed(() => {
+  if (totalPages.value <= 10) {
+    const items = Array.from(Array(totalPages.value).keys());
+
+    return items.map(i => createItem(i + 1, (i + 1) === currentPage.value));
+  };
+
   const items = Array.from(Array(7).keys());
 
   if (currentPage.value <= 2 || currentPage.value  >= (totalPages.value - 1)) {

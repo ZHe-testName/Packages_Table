@@ -10,6 +10,13 @@ export const useModalStore = defineStore<'modal', State, Getters, Actions>('moda
     activeModal: null,
     activeModalContext: null, 
   }),
+  getters: {
+    getContext: state => {
+      if (!state.activeModal?.name || !state.activeModalContext) return null;
+
+      return state.activeModalContext[state.activeModal.name];
+    },
+  },
   actions: {
     addModal(name, context) {
       const target = this.modals?.find(m => m.name === name);

@@ -1,3 +1,3 @@
-import type { IPackage } from "@/core/types/api";
+import type { IPackageObject } from "@/core/types/api";
 
-export interface IPackagesItemProps extends Pick<IPackage, 'name' | 'type' | 'bandwidth'> {};
+export interface IPackagesItemProps extends Pick<IPackageObject, 'name' | 'version'> {};

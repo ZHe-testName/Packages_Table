@@ -1,8 +1,7 @@
 .package-item {
-  display: grid;
-  grid-template-columns: 60px 160px repeat(2, 1fr);
-  align-items: center;
-  gap: $unit3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding: $unit3 $unit2;
   border-radius: $unit2;
   border: 2px solid $darkBluePrimary;
@@ -10,6 +9,20 @@
   transition: all;
   transition-duration: 0.3s;
   cursor: pointer;
+
+  &__description {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: $unit3;
+    padding: 0px $unit3;
+
+    &>h6 {
+      @include regular600(22px, $darkBlueBG);
+      margin-bottom: 5px;
+    }
+  }
 
   &:hover {
     transition: all;
@@ -21,5 +34,14 @@
   &>img {
     width: 46px;
     height: 46px;
+    margin: 0px auto;
   }
 }
+
+@media (max-width: $tablet) {
+  .package-item  {
+    &__description {
+      flex-direction: column;
+    }
+  }
+};

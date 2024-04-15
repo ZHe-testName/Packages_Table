@@ -1,20 +1,29 @@
 .titled-span {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: flex-start;
   gap: $unit3;
   padding: $unit3 $unit2;
 
   &__title {
     @include regular400(14px, $lightGray);
-    border-bottom: 1px solid $lightGray
+    border-bottom: 1px solid $lightGray;
+    margin-top: 3px;
   }
 
   &__text {
-    @include regular600(22px, $darkBlueBG);
+    @include regular600(16px, $darkBlueBG);
     text-overflow: ellipsis;
-    white-space: nowrap;
     overflow: hidden;
-    max-width: 80%;
+    max-width: 360px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
   }
 }
+
+@media (max-width: $tablet) {
+  .titled-span {
+    flex-direction: column;
+  }
+};

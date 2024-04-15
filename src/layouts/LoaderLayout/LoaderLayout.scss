@@ -11,6 +11,7 @@
   background-color: $darkBlueSemiTransparent;
 
   &__loader {
-    @include regular600(20px, $darkBlueBG);
+    width: 74px;
+    height: 74px;
   }
 }
